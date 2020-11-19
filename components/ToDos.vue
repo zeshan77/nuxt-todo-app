@@ -14,8 +14,10 @@
             <div>
                 <input v-if="todo.completed" type="checkbox" checked @click="toggleCompleted(todo)">
                 <input v-if="!todo.completed" type="checkbox" @click="toggleCompleted(todo)">
+                <button class="btn btn-sm btn-outline-danger" @click="removeTodo(todo)">Remove</button>
             </div>
           </li>
+          <li class="d-flex my-3 border-bottom pb-1" v-if="todos.length < 1">No todos found!</li>
         </ul>
         <div class="clearfix"></div>
         <div class="row px-5 mt-4">
@@ -71,6 +73,10 @@ export default {
 
             this.todos.push({title: this.title, completed: false})
             this.title = ''
+        },
+
+        removeTodo(todo) {
+            this.todos.splice(this.todos.indexOf(todo), 1)
         }
     }
 }
