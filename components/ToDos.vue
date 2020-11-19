@@ -1,5 +1,13 @@
 <template>
   <div>
+        <div class="d-flex justify-content-between px-5 bg-info py-4 border rounded">
+            <div class="input-group">
+                <input v-model="title" type="text" class="form-control" placeholder="Add new todo" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button @click="addTodo" class="btn btn-primary" type="button" id="button-addon2">Add</button>
+                </div>
+            </div>
+        </div>
         <ul class="d-block w-100 px-5">
           <li v-for="(todo, index) in todos" :key="index" class="d-flex justify-content-between my-3 border-bottom pb-1">
             <div>{{ todo.title}}</div>
@@ -20,9 +28,8 @@
 export default {
     data() {
         return {
-            todos: [
-                
-            ]
+            todos: [],
+            title: ''
         }
     },
 
@@ -57,6 +64,13 @@ export default {
         toggleCompleted(todo) {
             let todoIndex = this.todos.indexOf(todo)
             this.todos[todoIndex].completed = this.todos[todoIndex].completed ? false : true
+        },
+
+        addTodo() {
+            if(!this.title) return
+
+            this.todos.push({title: this.title, completed: false})
+            this.title = ''
         }
     }
 }
